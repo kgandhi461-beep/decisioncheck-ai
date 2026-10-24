@@ -8,10 +8,10 @@ import re
 import pandas as pd
 import streamlit as st
 
-from core import analysis as A
-from core import history
-from core.data_quality import clean_for_analysis, infer_schema, list_sheets, load_file, quality_report
-from core.impact import evaluate
+import analysis as A
+import history
+from data_quality import clean_for_analysis, infer_schema, list_sheets, load_file, quality_report
+from impact import evaluate
 
 ss = st.session_state
 TONE_CLS = {"green": "v-green", "amber": "v-amber", "red": "v-red", "grey": "v-grey"}
@@ -38,7 +38,7 @@ def render_pilot(root, llm=None):
         st.caption("Or use:")
         if st.button("🧪 Sample pilot results", width="stretch",
                      help="Synthetic data: extra 10-point discount in the North region from 15 Oct 2025, during the festive season"):
-            ss.pilot_src = ("file", str(root / "data" / "sample_pilot_results.csv"), "sample_pilot_results.csv", None)
+            ss.pilot_src = ("file", str(root / "sample_pilot_results.csv"), "sample_pilot_results.csv", None)
         if ss.get("df") is not None and st.button("📂 Data from 'Check a decision'", width="stretch"):
             ss.pilot_src = ("loaded", None, ss.name, None)
     if up is not None:

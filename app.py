@@ -10,15 +10,15 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
-from core import analysis as A
-from core.agent import run_agent
-from core import history
-from core.chat import answer as chat_answer
-from core.data_quality import clean_for_analysis, infer_schema, list_sheets, load_file, quality_report
-from core.llm import LLM, test_connection
-from core.planner import DecisionFrame, build_plan, interpret, suggest_decisions
-from core.report import build_html_report
-from core.whatif import categorical_whatif, lever_range, numeric_whatif
+import analysis as A
+from agent import run_agent
+import history
+from chat import answer as chat_answer
+from data_quality import clean_for_analysis, infer_schema, list_sheets, load_file, quality_report
+from llm import LLM, test_connection
+from planner import DecisionFrame, build_plan, interpret, suggest_decisions
+from report import build_html_report
+from whatif import categorical_whatif, lever_range, numeric_whatif
 from ui_extra import render_guide, render_history, render_pilot
 
 ROOT = Path(__file__).parent
@@ -201,9 +201,9 @@ with c2:
     st.caption("No data? Try a synthetic sample:")
     b1, b2 = st.columns(2)
     if b1.button("🛒 Retail sales", width="stretch"):
-        load_into_state(str(ROOT / "data" / "sample_retail_sales.csv"), "sample_retail_sales.csv")
+        load_into_state(str(ROOT / "sample_retail_sales.csv"), "sample_retail_sales.csv")
     if b2.button("👥 HR performance", width="stretch"):
-        load_into_state(str(ROOT / "data" / "sample_hr_performance.csv"), "sample_hr_performance.csv")
+        load_into_state(str(ROOT / "sample_hr_performance.csv"), "sample_hr_performance.csv")
 
 if ss.df is None:
     st.info("Upload a dataset (or pick a sample) to begin. Any tabular business data works — sales, HR, marketing, operations, finance.")
